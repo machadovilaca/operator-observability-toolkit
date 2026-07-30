@@ -22,6 +22,9 @@ lint:
 	go install github.com/golangci/golangci-lint/cmd/golangci-lint@${GOLANDCI_LINT_VERSION}
 	golangci-lint run
 
+govulncheck:
+	go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+
 check-diff:
 	git difftool -y --trust-exit-code
 
