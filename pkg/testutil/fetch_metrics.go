@@ -73,7 +73,7 @@ func (dmg *DefaultMetricsGetter) Run() (map[string][]MetricResult, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to query service endpoint: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("unexpected response status: %s", resp.Status)
