@@ -103,7 +103,7 @@ var _ = Describe("Metrics", func() {
 func metricsHTTPRequest(baseURL string) string {
 	resp, err := http.Get(baseURL + "/metrics")
 	Expect(err).ToNot(HaveOccurred())
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	Expect(resp.StatusCode).To(Equal(http.StatusOK))
 
